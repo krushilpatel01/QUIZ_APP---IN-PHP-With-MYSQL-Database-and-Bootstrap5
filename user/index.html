@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Quiz Design By RAJHANS DIGITAL</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-gray-700 px-10 py-4">
+                <div class="flex items-center gap-3 text-gray-900 dark:text-white">
+                    <svg class="h-6 w-6 text-primary" fill="none" viewBox="0 0 48 48"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" fill="currentColor"></path>
+                    </svg>
+                    <h2 class="text-xl font-bold">QuizMaster</h2>
+                </div>
+                <nav class="hidden md:flex flex-1 justify-center items-center gap-8">
+                    <a class="text-sm font-medium hover:text-primary" href="#">Home</a>
+                    <a class="text-sm font-medium hover:text-primary" href="#">Quizzes</a>
+                    <a class="text-sm font-medium hover:text-primary" href="#">Leaderboard</a>
+                    <a class="text-sm font-medium hover:text-primary" href="#">About</a>
+                </nav>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary dark:bg-primary/20 text-sm font-bold transition-colors hover:bg-primary/20 dark:hover:bg-primary/30">
+                        <span>Log In</span>
+                    </button>
+                    <button
+                        class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold transition-opacity hover:opacity-90">
+                        <span>Sign Up</span>
+                    </button>
+                </div>
+            </header>
+            <main class="flex flex-1 justify-center py-10 px-4 sm:px-6 lg:px-8">
+                <div class="layout-content-container flex w-full max-w-6xl flex-col gap-10">
+                    <div class="@container">
+                        <div class="@[480px]:p-4">
+                            <div class="relative flex min-h-[480px] flex-col items-center justify-center gap-6 overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat p-6 text-center text-white"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDJIW900xZ9FPA9Et5Di1TaKN5dDS2eAc6YNAC9bQbb0D5mFDX_uJuO1KAVE2CTjvRlZBssAC4g43ybMRJJVy9ozLhU5kK4iwPeUb6NAtzdDFpTSX82GuoQnjKelbrVzqiP5cLc-J1ny9MRzs6JAYh9iu4TQKHKFIL36Pf1z4tGVwSu1qQkV5oWrG_PQYqCODg-Cx5pduxb-rmlxaX54RCiDzVZKWFzN2De3TF0dKb5K4etllY7DRnEDBK-yVlPgkDbuB0Oi_LRVk8");'>
+                                <div class="absolute inset-0 bg-black/50"></div>
+                                <div class="relative z-10 flex flex-col gap-4">
+                                    <h1 class="text-4xl font-black drop-shadow-md @[480px]:text-6xl">Test Your Knowledge
+                                    </h1>
+                                    <p class="max-w-2xl text-base font-light drop-shadow-sm @[480px]:text-lg">Explore a
+                                        wide range of quizzes on various topics. Join our community and compete with
+                                        others on the leaderboard.</p>
+                                </div>
+                                <button
+                                    class="relative z-10 flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold tracking-wide transition-transform hover:scale-105">
+                                    <span>Start Quiz</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <section>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white px-4 pb-4">Popular Quizzes</h2>
+                        <div class="relative">
+                            <div
+                                class="flex gap-6 overflow-x-auto px-4 pb-4 [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
+                                <div class="flex flex-col gap-3 w-64 flex-shrink-0">
+                                    <div class="w-full aspect-square bg-cover bg-center rounded-lg"
+                                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBG6ZM5dVVmixYXqFNb-5mvqbAumVOVgYUAUw7fwqZ7cnyjEZOTP9yfGTgd7KpAipZGHH3j-BV-ti_IYhXmwhSfls-imPRVHn6A5xav2q7LnlvtTDBmarQAdgg37eruhHIW23JLse-c5NN1spVzhYkvmQ5s_z61Qn1AUrcT6d4CISvfx4xIB1P9-hmymaeXGMsiuSYIChnMubFGuWp30Ya4lge5BxTHw8aA9rCXh1XxzUi6oJ4k0_70mOrJ7nBcPVU3UKKdRjtnLYE");'>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900 dark:text-white">Science Quiz</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Test your knowledge of the
+                                            natural world.</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-3 w-64 flex-shrink-0">
+                                    <div class="w-full aspect-square bg-cover bg-center rounded-lg"
+                                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBy5tcvnKmqxAYt7nFYrvSl5X7XoiWUEuqam4l8Wg6_5zVYoyeItgWvCA1KbNPloitcXGbUF8C2bKCFzh_EuBpRRvhTOpzfcbGZLyQTNtlbmSmXE7yHgc2uXisTf9Inb8ZtObbpcXpRg_NlWVXzBI5ROlLHu1GKm1xHOfdaHsl73Xk4HXVEd7FVZXK1RuO3OVfHu2BkqDyn0E4EB9JHolK0u1jPGVSl0fKCrS5HowF8SK7Wv9VUt6SKe24n5WiZ6VRr_SWV9RvMFoQ");'>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900 dark:text-white">History Quiz</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Explore historical events
+                                            and figures.</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-3 w-64 flex-shrink-0">
+                                    <div class="w-full aspect-square bg-cover bg-center rounded-lg"
+                                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDhFOxnfmPkFWLaJxG2GjMu3jot80MQ_qzseyUha1FJW5ffNTXx-dIU6J0ZMVPLedB-V9sRzDHMblpfNdTthVbE2-UBv4t6zjAI6q7Q0VMPjEQJ1MJBPha7rO2WiYk6fNteNJQn7ZaO--EfXDN2AYUk36sohT-AZeM9I3A_JUKos_u5T6VMvji4Zrxo1KBlySPVcO6oBuWPy8tKPuzI7XGqUic9DAnUwzoieS_O4n-HysmSSpI9jdKuBrcz8ssQq7ZcYilFP5kggGQ");'>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900 dark:text-white">Geography Quiz</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Discover the world's
+                                            landscapes and cultures.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white px-4 pb-4">Recent Quizzes</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+                            <div class="flex flex-col gap-3">
+                                <div class="w-full aspect-square bg-cover bg-center rounded-lg"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAz6YSr2-36hiECZEtFGXORWSDFR1Bh9P-wbUjyP_MMR0nraj8oceTxDDO4zk7_5BQqFWV7yAjKWTby7uRZOp7v5MLsaAJXKXhV9XXut02cnTYW3_eV4Lpyzmmt9xmgdMXPemH9ldNNdk1Xcmnoq8aj2gDzQTkQZZSSYYcYix5TYJQyEUdGLx_5V2CpFPY-lyndNOJQZRMq2dUhdQvbN2OstG7HQw86NQ0FpyitaGLtujO_v2FWNOmJwG9RIAaNiSeN1X35nbHq-BE");'>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-900 dark:text-white">Technology Quiz</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Stay updated with the latest
+                                        tech trends.</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-3">
+                                <div class="w-full aspect-square bg-cover bg-center rounded-lg"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAuXsteQ2zW7s6GxJ_3dasTnKjLuD_KZVZRstVyFg3BRIdMfSf3a-rjKhRQ3qGpLCaY17nygUJMS12w7swyPZy9i5RcXewKANnYP8cc-u29DHML0ihKik1acDxJe4qYI_25yxI6hS02m5WTx1JZywLL6s7vxtiOnwc1Ppoq0vaPvjtdLNm9AekJBXElC1_vzNYqMX36grhpWaXeNKS3IJ9x8AM8rKL-8apWBRef5RTK9oXbbPWaKPyyKhkgsYuxt8B8CXVr5S8LyVo");'>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-900 dark:text-white">Literature Quiz</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Dive into the world of classic
+                                        and modern literature.</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-3">
+                                <div class="w-full aspect-square bg-cover bg-center rounded-lg"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD0GN1gOL6fmxtW8BUX2YCo12cRyf1BT4HpZJps2K9oY5l8OgefOHfBqUmD-Mo554r96qwgj9Q4dosLmjeTY8-NMud9xiilOMFKX1ERDOCMU_8eOn4thYMeb1GQRCTbliQY4wLyea_vgVHA2rEEc3m_jC3lXV8xjMVkjAEIztnVID7xlXC31sQgz7yBRDVLwq6cusCo7_4xjk9-fVZIch40jeghc_3WxHVr7SRpL_U8rDdNsy_FHYb0NXUNSQDwuGfnOH1veQ9w-PM");'>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-900 dark:text-white">Art Quiz</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Explore different art movements
+                                        and artists.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+            <footer
+                class="w-full bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
+                <div class="mx-auto max-w-6xl px-5 py-10 text-center">
+                    <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 mb-6">
+                        <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary" href="#">About</a>
+                        <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary" href="#">Contact</a>
+                        <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary" href="#">Privacy
+                            Policy</a>
+                        <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary" href="#">Terms of
+                            Service</a>
+                    </div>
+                    <div class="flex justify-center gap-6 mb-6">
+                        <a class="text-gray-500 dark:text-gray-400 hover:text-primary" href="#">
+                            <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a class="text-gray-500 dark:text-gray-400 hover:text-primary" href="#">
+                            <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a class="text-gray-500 dark:text-gray-400 hover:text-primary" href="#">
+                            <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">© 2025 QuizMaster, Design & Develop by RAJHANS DIGITAL - All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</body>
+<!-- Login Modal -->
+<div id="loginModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+    <div class="bg-white dark:bg-background-dark rounded-lg w-full max-w-md p-6 shadow-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold text-gray-900 dark:text-white">Log In</h2>
+            <button onclick="toggleModal('loginModal')" class="text-gray-500 hover:text-primary">&times;</button>
+        </div>
+        <form action="login.php" method="post" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium mb-1">Email</label>
+                <input type="email" name="email"
+                    class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-background-dark dark:text-gray-200"
+                    required>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Password</label>
+                <input type="password" name="password"
+                    class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-background-dark dark:text-gray-200"
+                    required>
+            </div>
+            <button type="submit" class="w-full h-10 rounded-lg bg-primary text-white font-bold hover:opacity-90">Log
+                In</button>
+        </form>
+        <p class="text-sm text-center mt-4 text-gray-600 dark:text-gray-400">
+            Don’t have an account?
+            <a href="#" class="text-primary font-medium"
+                onclick="switchModal('loginModal','registerModal')">Register</a>
+        </p>
+    </div>
+</div>
+
+<!-- Register Modal -->
+<div id="registerModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+    <div class="bg-white dark:bg-background-dark rounded-lg w-full max-w-md p-6 shadow-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold text-gray-900 dark:text-white">Sign Up</h2>
+            <button onclick="toggleModal('registerModal')" class="text-gray-500 hover:text-primary">&times;</button>
+        </div>
+        <form action="register.php" method="post" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium mb-1">Name</label>
+                <input type="text" name="name"
+                    class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-background-dark dark:text-gray-200"
+                    required>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Email</label>
+                <input type="email" name="email"
+                    class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-background-dark dark:text-gray-200"
+                    required>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Password</label>
+                <input type="password" name="password"
+                    class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-background-dark dark:text-gray-200"
+                    required>
+            </div>
+            <button type="submit" class="w-full h-10 rounded-lg bg-primary text-white font-bold hover:opacity-90">Sign
+                Up</button>
+        </form>
+        <p class="text-sm text-center mt-4 text-gray-600 dark:text-gray-400">
+            Already have an account?
+            <a href="#" class="text-primary font-medium" onclick="switchModal('registerModal','loginModal')">Log In</a>
+        </p>
+    </div>
+</div>
+
+<script>
+    function toggleModal(id) {
+        document.getElementById(id).classList.toggle('hidden');
+    }
+    function switchModal(hideId, showId) {
+        document.getElementById(hideId).classList.add('hidden');
+        document.getElementById(showId).classList.remove('hidden');
+    }
+
+    // Hook up buttons in header:
+    document.querySelectorAll('button').forEach(btn => {
+        if (btn.textContent.trim() === 'Log In') {
+            btn.addEventListener('click', () => toggleModal('loginModal'));
+        }
+        if (btn.textContent.trim() === 'Sign Up') {
+            btn.addEventListener('click', () => toggleModal('registerModal'));
+        }
+    });
+</script>
+
+</html>
