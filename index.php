@@ -72,7 +72,7 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id ASC LIMIT 3");
 
     <!-- Hero Section -->
     <section class="hero d-flex align-items-center justify-content-center text-center"
-        style="background-image:url('../Admin/uploads/hero-banner.jpg'); background-position:center; background-size: cover; background-repeat: no-repeat;">
+        style="background-image:url('Admin/uploads/hero-banner.jpg'); background-position:center; background-size: cover; background-repeat: no-repeat;">
         <div class="container hero-content">
             <h1 class="display-4 fw-bold">Test Your Knowledge</h1>
             <p class="lead mb-4">Explore a wide range of quizzes on various topics. Join our community and compete with
@@ -90,7 +90,7 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id ASC LIMIT 3");
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card h-100">
                         <div class="quiz-card-img card-img-top"
-                            style="background-image: url('../Admin/uploads/<?php echo !empty($quiz['image']) ? $quiz['image'] : "default.jpg"; ?>'); height:200px; background-size:cover; background-position:center;">
+                            style="background-image: url('Admin/uploads/<?php echo !empty($quiz['image']) ? $quiz['image'] : "default.jpg"; ?>'); height:200px; background-size:cover; background-position:center;">
                         </div>
                         <div class="card-body">
                             <h2 class="fw-bold mb-1"><?php echo htmlspecialchars($quiz['title']); ?></h2>
