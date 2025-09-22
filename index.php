@@ -61,12 +61,12 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id ASC LIMIT 3");
                 <span class="fw-bold">QuizMaster</span>
             </a>
 
-                <div class="d-flex gap-2">
-                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Log
-                        In</button>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Sign
-                        Up</button>
-                </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Log
+                    In</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Sign
+                    Up</button>
+            </div>
         </div>
     </nav>
 
@@ -85,17 +85,19 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id ASC LIMIT 3");
 
         <section class="mb-5">
             <h2 class="h3 fw-bold mb-4">Popular Quizzes</h2>
-            <div class="row g-3">
+            <div class="row g-5">
                 <?php while($quiz = mysqli_fetch_assoc($quizzes)) { ?>
-                <div class="col-12 col-md-6 col-lg-4">
+                <div class="col-sm-12 col-md-12 col-lg-6">
                     <div class="card h-100">
                         <div class="quiz-card-img card-img-top"
-                            style="background-image: url('Admin/uploads/<?php echo !empty($quiz['image']) ? $quiz['image'] : "default.jpg"; ?>'); height:200px; background-size:cover; background-position:center;">
+                            style="background-image: url('Admin/uploads/<?php echo !empty($quiz['image']) ? $quiz['image'] : "default.jpg"; ?>'); height:800px; background-size:cover; background-position:center;">
                         </div>
                         <div class="card-body">
                             <h2 class="fw-bold mb-1"><?php echo htmlspecialchars($quiz['title']); ?></h2>
-                            <p class="text-muted small"><?php echo htmlspecialchars($quiz['description']); ?></p>
-                            <a href="quiz.php?id=<?php echo $quiz['id']; ?>" class="btn btn-sm btn-primary mt-2">Take
+                            <p class="text-muted small" style="font-size:18px;">
+                                <?php echo htmlspecialchars($quiz['description']); ?></p>
+                            <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>"
+                                class="btn btn-sm btn-primary mt-2">Take
                                 Quiz</a>
                         </div>
                     </div>

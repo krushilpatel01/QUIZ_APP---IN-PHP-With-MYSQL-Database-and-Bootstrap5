@@ -12,14 +12,14 @@ include 'includes/header.php';
 if (isset($_POST['add_quiz'])) {
     $title = mysqli_real_escape_string($conn, $_POST['title']);
     $description = mysqli_real_escape_string($conn, $_POST['description']);
+    $time = intval($_POST['time']);
+    $max_mcq = intval($_POST['max_mcq']);
 
     // Handle image upload
     $image = '';
     if (!empty($_FILES['image']['name'])) {
-        $target_dir = "uploads/"; // create this folder in your project root
-        if (!is_dir($target_dir)) {
-            mkdir($target_dir, 0777, true);
-        }
+        $target_dir = "uploads/"; // create this folder if not exist
+        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
         $image_name = time() . '_' . basename($_FILES["image"]["name"]);
         $target_file = $target_dir . $image_name;
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
@@ -27,8 +27,8 @@ if (isset($_POST['add_quiz'])) {
         }
     }
 
-    mysqli_query($conn, "INSERT INTO quizzes (title, description, image) 
-                         VALUES ('$title', '$description', '$image')");
+    mysqli_query($conn, "INSERT INTO quizzes (title, description, image, time, max_mcq) 
+                         VALUES ('$title', '$description', '$image', $time, $max_mcq)");
     header("Location: quizzes.php");
     exit();
 }
@@ -36,7 +36,6 @@ if (isset($_POST['add_quiz'])) {
 // Handle delete quiz
 if (isset($_GET['delete'])) {
     $id = intval($_GET['delete']);
-    // Optional: delete image from folder too
     $img_q = mysqli_query($conn, "SELECT image FROM quizzes WHERE id=$id");
     $img_row = mysqli_fetch_assoc($img_q);
     if (!empty($img_row['image']) && file_exists("uploads/".$img_row['image'])) {
@@ -50,6 +49,7 @@ if (isset($_GET['delete'])) {
 // Fetch quizzes
 $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id DESC");
 ?>
+
 
 
 <body class="hold-transition sidebar-mini">
@@ -123,11 +123,20 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id DESC");
                                     <textarea name="description" class="form-control" rows="3" required></textarea>
                                 </div>
                                 <div class="mb-3">
+                                    <label>Time (minutes)</label>
+                                    <input type="number" name="time" class="form-control" required min="1">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Max MCQ to Pass</label>
+                                    <input type="number" name="max_mcq" class="form-control" required min="1">
+                                </div>
+                                <div class="mb-3">
                                     <label>Quiz Image</label>
                                     <input type="file" name="image" class="form-control">
                                 </div>
                                 <button type="submit" name="add_quiz" class="btn btn-primary">Add Quiz</button>
                             </form>
+
                         </div>
                     </div>
 
@@ -144,6 +153,8 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id DESC");
                                         <th>Image</th>
                                         <th>Title</th>
                                         <th>Description</th>
+                                        <th>Time (min)</th>
+                                        <th>Max MCQ to Pass</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -161,16 +172,20 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id DESC");
                                         </td>
                                         <td><?php echo $row['title']; ?></td>
                                         <td><?php echo $row['description']; ?></td>
+                                        <td><?php echo $row['time']; ?></td>
+                                        <td><?php echo $row['max_mcq']; ?></td>
                                         <td>
                                             <a href="questions.php?quiz_id=<?php echo $row['id']; ?>"
                                                 class="btn btn-sm btn-success mb-3">Manage Questions</a>
-                                            <a href="?delete=<?php echo $row['id']; ?>" class="btn btn-sm btn-danger w-100"
+                                            <a href="?delete=<?php echo $row['id']; ?>"
+                                                class="btn btn-sm btn-danger w-100"
                                                 onclick="return confirm('Delete this quiz?')">Delete</a>
                                         </td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
 
