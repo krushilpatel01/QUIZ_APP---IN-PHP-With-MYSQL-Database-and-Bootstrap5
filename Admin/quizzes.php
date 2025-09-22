@@ -8,20 +8,43 @@ include 'includes/config.php';
 $page_title = "Welcome To Quizzes Page";
 include 'includes/header.php';
 
-
 // Handle add quiz
 if (isset($_POST['add_quiz'])) {
     $title = mysqli_real_escape_string($conn, $_POST['title']);
     $description = mysqli_real_escape_string($conn, $_POST['description']);
-    mysqli_query($conn, "INSERT INTO quizzes (title, description) VALUES ('$title', '$description')");
+
+    // Handle image upload
+    $image = '';
+    if (!empty($_FILES['image']['name'])) {
+        $target_dir = "uploads/"; // create this folder in your project root
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0777, true);
+        }
+        $image_name = time() . '_' . basename($_FILES["image"]["name"]);
+        $target_file = $target_dir . $image_name;
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+            $image = $image_name;
+        }
+    }
+
+    mysqli_query($conn, "INSERT INTO quizzes (title, description, image) 
+                         VALUES ('$title', '$description', '$image')");
     header("Location: quizzes.php");
+    exit();
 }
 
 // Handle delete quiz
 if (isset($_GET['delete'])) {
     $id = intval($_GET['delete']);
+    // Optional: delete image from folder too
+    $img_q = mysqli_query($conn, "SELECT image FROM quizzes WHERE id=$id");
+    $img_row = mysqli_fetch_assoc($img_q);
+    if (!empty($img_row['image']) && file_exists("uploads/".$img_row['image'])) {
+        unlink("uploads/".$img_row['image']);
+    }
     mysqli_query($conn, "DELETE FROM quizzes WHERE id=$id");
     header("Location: quizzes.php");
+    exit();
 }
 
 // Fetch quizzes
@@ -90,7 +113,7 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id DESC");
                             <h3 class="card-title">Add New Quiz</h3>
                         </div>
                         <div class="card-body">
-                            <form method="post">
+                            <form method="post" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label>Quiz Title</label>
                                     <input type="text" name="title" class="form-control" required>
@@ -98,6 +121,10 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id DESC");
                                 <div class="mb-3">
                                     <label>Description</label>
                                     <textarea name="description" class="form-control" rows="3" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Quiz Image</label>
+                                    <input type="file" name="image" class="form-control">
                                 </div>
                                 <button type="submit" name="add_quiz" class="btn btn-primary">Add Quiz</button>
                             </form>
@@ -114,6 +141,7 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id DESC");
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Image</th>
                                         <th>Title</th>
                                         <th>Description</th>
                                         <th>Actions</th>
@@ -123,12 +151,20 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id DESC");
                                     <?php while($row = mysqli_fetch_assoc($quizzes)) { ?>
                                     <tr>
                                         <td><?php echo $row['id']; ?></td>
+                                        <td>
+                                            <?php if(!empty($row['image'])) { ?>
+                                            <img src="uploads/<?php echo $row['image']; ?>" width="60" height="60"
+                                                style="object-fit:cover;">
+                                            <?php } else { ?>
+                                            <span class="text-muted">No image</span>
+                                            <?php } ?>
+                                        </td>
                                         <td><?php echo $row['title']; ?></td>
                                         <td><?php echo $row['description']; ?></td>
                                         <td>
                                             <a href="questions.php?quiz_id=<?php echo $row['id']; ?>"
-                                                class="btn btn-sm btn-success">Manage Questions</a>
-                                            <a href="?delete=<?php echo $row['id']; ?>" class="btn btn-sm btn-danger"
+                                                class="btn btn-sm btn-success mb-3">Manage Questions</a>
+                                            <a href="?delete=<?php echo $row['id']; ?>" class="btn btn-sm btn-danger w-100"
                                                 onclick="return confirm('Delete this quiz?')">Delete</a>
                                         </td>
                                     </tr>
@@ -140,8 +176,9 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id DESC");
 
                 </div>
             </section>
+        </div>
 
-            <?php
+        <?php
 
 include 'includes/footer.php';
 ?>
