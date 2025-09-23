@@ -73,7 +73,7 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id DESC");
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview">
                         <li class="nav-item">
-                            <a href="index.php" class="nav-link">
+                            <a href="index.php" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -94,6 +94,12 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id DESC");
                             <a href="users.php" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>Users</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="results.php" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>Result</p>
                             </a>
                         </li>
                     </ul>

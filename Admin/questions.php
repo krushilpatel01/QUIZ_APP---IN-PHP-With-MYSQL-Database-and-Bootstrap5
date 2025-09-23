@@ -63,7 +63,7 @@ $quiz_title = mysqli_fetch_assoc(mysqli_query($conn, "SELECT title FROM quizzes 
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview">
                         <li class="nav-item">
-                            <a href="index.php" class="nav-link">
+                            <a href="index.php" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -86,6 +86,12 @@ $quiz_title = mysqli_fetch_assoc(mysqli_query($conn, "SELECT title FROM quizzes 
                                 <p>Users</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="results.php" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>Result</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -97,7 +103,7 @@ $quiz_title = mysqli_fetch_assoc(mysqli_query($conn, "SELECT title FROM quizzes 
 
             <section class="content">
                 <div class="container-fluid">
-                    
+
                     <!-- Add Question Form -->
                     <div class="card mb-4">
                         <div class="card-header">

@@ -1,8 +1,9 @@
 <?php
+session_start(); // MUST be first line
 include 'includes/config.php';
 
-// fetch latest quizzes
-$quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id ASC LIMIT 3");
+// Fetch latest quizzes
+$quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id ASC LIMIT 10");
 ?>
 
 <!DOCTYPE html>
@@ -62,10 +63,14 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id ASC LIMIT 3");
             </a>
 
             <div class="d-flex gap-2">
+                <?php if(isset($_SESSION['user_id'])): ?>
+                <span class="me-2">Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?></span>
+                <a href="logout.php" class="btn btn-danger">Logout</a>
+                <?php else: ?>
                 <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Log
                     In</button>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Sign
-                    Up</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Sign Up</button>
+                <?php endif; ?>
             </div>
         </div>
     </nav>
@@ -74,6 +79,15 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id ASC LIMIT 3");
     <section class="hero d-flex align-items-center justify-content-center text-center"
         style="background-image:url('Admin/uploads/hero-banner.jpg'); background-position:center; background-size: cover; background-repeat: no-repeat;">
         <div class="container hero-content">
+            <h2 class="display-10 fw-bold">
+                <?php 
+                if(isset($_SESSION['name'])) {
+                    echo "Welcome, " . htmlspecialchars($_SESSION['name']);
+                } else {
+                    echo "Not Logged In";
+                }
+                ?>
+            </h2>
             <h1 class="display-4 fw-bold">Test Your Knowledge</h1>
             <p class="lead mb-4">Explore a wide range of quizzes on various topics. Join our community and compete with
                 others on the leaderboard.</p>
@@ -82,7 +96,7 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id ASC LIMIT 3");
     </section>
 
     <div class="container my-5">
-
+        <!-- Popular Quizzes -->
         <section class="mb-5">
             <h2 class="h3 fw-bold mb-4">Popular Quizzes</h2>
             <div class="row g-5">
@@ -97,17 +111,13 @@ $quizzes = mysqli_query($conn, "SELECT * FROM quizzes ORDER BY id ASC LIMIT 3");
                             <p class="text-muted small" style="font-size:18px;">
                                 <?php echo htmlspecialchars($quiz['description']); ?></p>
                             <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>"
-                                class="btn btn-sm btn-primary mt-2">Take
-                                Quiz</a>
+                                class="btn btn-sm btn-primary mt-2">Take Quiz</a>
                         </div>
                     </div>
                 </div>
                 <?php } ?>
             </div>
         </section>
-
-
-
     </div>
 
     <!-- Footer -->
